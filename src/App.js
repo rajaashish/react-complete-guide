@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-
 import './App.css'
 import Person from './Person/Person'
 
@@ -35,7 +34,8 @@ class App extends Component {
       ]
     })
   }
-  togglePersonHandler = () => {
+
+  togglePersonsHandler = () => {
     const doesShow = this.state.showPersons
     this.setState({ showPersons: !doesShow })
   }
@@ -48,16 +48,11 @@ class App extends Component {
       padding: '8px',
       cursor: 'pointer'
     }
+
     let persons = null
 
-    return (
-      <div className='App'>
-        <h1>Hi, I'm a React App</h1>
-        <p>This is really working!</p>
-        <button style={style} onClick={() => this.togglePersonHandler}>
-          Switch Name
-        </button>
-
+    if (this.state.showPersons) {
+      persons = (
         <div>
           <Person
             name={this.state.persons[0].name}
@@ -76,6 +71,17 @@ class App extends Component {
             age={this.state.persons[2].age}
           />
         </div>
+      )
+    }
+
+    return (
+      <div className='App'>
+        <h1>Hi, I'm a React App</h1>
+        <p>This is really working!</p>
+        <button style={style} onClick={this.togglePersonsHandler}>
+          Toggle Persons
+        </button>
+        {persons}
       </div>
     )
     // return React.createElement('div', {className: 'App'}, React.createElement('h1', null, 'Does this work now?'));
